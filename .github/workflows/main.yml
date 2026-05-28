@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   update_html_and_readme:
     runs-on: ubuntu-latest
@@ -12,3 +15,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Update index.html for Team Leader
+        if: github.actor == '14332997'
+        run: |
+          echo "<p>Updated by Team Leader on $(date)</p>" >> index.html
